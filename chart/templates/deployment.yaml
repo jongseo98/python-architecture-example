@@ -34,19 +34,23 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
+            - name: app
+              containerPort: 8000
           livenessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /ping
+              port: app
           readinessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /ping
+              port: app
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+          {{- if .Values.postgresql.enabled }}
+          - name: PG_DSN
+            value: {{ .Values.postgresql.dsn }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
