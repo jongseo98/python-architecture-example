@@ -83,7 +83,7 @@ affinity: {}
 
 postgresql:
   enabled: true
-  dsn: postgresql+asyncpg://user:password@example-postgresql:5432/python_architecture
+  dsn: postgresql+asyncpg://user:password@python-architecture-example-postgresql:5432/python_architecture
   auth:
     database: python_architecture
     username: user
