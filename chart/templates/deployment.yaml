@@ -51,6 +51,8 @@ spec:
           - name: PG_DSN
             value: {{ .Values.postgresql.dsn }}
           {{- end }}
+          - name: ROOT_PATH
+            value: /example
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

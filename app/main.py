@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 from app.config import settings
 from app.tables import user
 
-app = FastAPI()
+app = FastAPI(root_path=settings.ROOT_PATH)
 engine: AsyncEngine = create_async_engine(settings.PG_DSN)
 
 
